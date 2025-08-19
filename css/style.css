@@ -60,6 +60,7 @@ body {
 
 .weather_today {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
 }
  .weather_image {
