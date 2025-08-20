@@ -1,25 +1,27 @@
 @font-face {
     font-family: 'Open Sans';
     src: url(../assets/fonts/OpenSans.woff2),
-    url(../assets/fonts/OpenSans.woff);
+        url(../assets/fonts/OpenSans.woff);
 }
+
 @font-face {
     font-family: 'Open Sans';
     src: url(../assets/fonts/OpenSans-Light.woff2),
-    url(../assets/fonts/OpenSans-Light.woff);
+        url(../assets/fonts/OpenSans-Light.woff);
     font-weight: 300;
 }
 
 @font-face {
     font-family: 'Open Sans';
     src: url(../assets/fonts/OpenSans-Bold.woff2),
-    url(../assets/fonts/OpenSans-Bold.woff);
+        url(../assets/fonts/OpenSans-Bold.woff);
     font-weight: 700;
 }
+
 @font-face {
     font-family: 'Open Sans';
     src: url(../assets/fonts/OpenSans-Semibold.woff2),
-    url(../assets/fonts/OpenSans-Bold.woff);
+        url(../assets/fonts/OpenSans-Bold.woff);
     font-weight: 600;
 }
 
@@ -31,7 +33,7 @@ body {
     color: #fff;
     font-family: 'Open Sans', Arial, Sans-serif;
     font-weight: 300;
-    font-size: 22px;   
+    font-size: 22px;
 }
 
 .weather {
@@ -43,14 +45,30 @@ body {
     white-space: nowrap;
 }
 
+.weather_search-wrapper {
+    position: relative;
+    margin-bottom: 20px;
+}
+
 .weather_search {
     width: 100%;
-    padding: 15px 10px;
+    padding: 15px 20px;
+    /* Increased padding for a modern look */
     border: none;
-    background-color: rgba(255, 2555, 255, 0.15);
+    border-radius: 25px;
+    /* Rounded corners for a modern feel */
+    background-color: rgba(255, 255, 255, 0.15);
     font-size: 20px;
     color: inherit;
-    margin-bottom: 20px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    /* Smooth transition */
+}
+
+.weather_search:focus {
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    /* Add a subtle shadow on focus */
 }
 
 .weather_search::placeholder {
@@ -58,26 +76,63 @@ body {
     opacity: 0.7;
 }
 
+.suggestions-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    background-color: white;
+    border-radius: 0 0 20px 20px;
+    /* Rounded bottom corners */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.suggestions-list {
+    max-height: 50vh;
+    overflow-y: auto;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.suggestions-list li {
+    padding: 15px 20px;
+    /* Consistent padding with the search input */
+    cursor: pointer;
+    color: #000;
+    transition: background-color 0.2s ease;
+}
+
+.suggestions-list li:hover {
+    background-color: #f0f4f8;
+    /* A lighter hover color */
+}
+
 .weather_today {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
- .weather_image {
+
+.weather_image {
     width: 30vmin;
     align-self: center;
- }
+}
+
 .weather_city {
-    font-style: 36px;
+    font-size: 36px;
     font-weight: 600;
     margin: 20px 0;
 }
 
 .weather_day {
-    font-style: 30px;
+    font-size: 30px;
     margin: 10px 0;
     font-weight: 400;
 }
+
 .weather_indicator::before {
     content: '';
     display: inline-block;
@@ -87,12 +142,15 @@ body {
     background-size: cover;
     margin-right: 10px;
 }
+
 .weather_indicator--humidity::before {
     background-image: url(../assets/images/humidity.png);
 }
+
 .weather_indicator--wind::before {
     background-image: url(../assets/images/wind.png);
 }
+
 .weather_indicator--pressure::before {
     background-image: url(../assets/images/pressure.png);
 }
@@ -112,8 +170,9 @@ body {
 .weather_forecast_icon {
     max-width: 50%;
 }
+
 .weather_forecast_item {
-    background-color: rgba(255, 2555, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.2);
     border-radius: 10px;
     margin: 0 10px 10px;
     padding: 30px 5px 20px;
@@ -121,4 +180,51 @@ body {
     min-width: 150px;
     width: calc(20% - 20px);
     flex-grow: 1;
+}
+.suggestions-list li.selected {
+    background-color: #f0f4f8;
+    border: 1px solid #d1d5db;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    body {
+        font-size: 18px;
+    }
+
+    .weather {
+        width: 90%;
+    }
+
+    .weather_today {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .weather_image {
+        width: 50vmin;
+    }
+
+    .weather_city {
+        font-size: 30px;
+    }
+
+    .weather_day {
+        font-size: 24px;
+    }
+
+    .weather_temperature {
+        font-size: 50px;
+    }
+
+    .weather_forecast_item {
+        width: calc(50% - 20px);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .weather_forecast_item {
+        width: 100%;
+        margin: 0 0 10px;
+    }
 }
